@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.weatherapplication.WeatherController">
+    <children>
+        <ImageView fx:id="background" fitHeight="750.0" fitWidth="354.0">
+            <image>
+                <Image url="@../../../Image/after_noon.jpg" />
+            </image>
+        </ImageView>
+        <AnchorPane layoutX="15.0" layoutY="298.0" prefHeight="129.0" prefWidth="326.0" styleClass="rectangle-card">
+         <children>
+            <Label alignment="CENTER" layoutX="98.0" layoutY="97.0" prefHeight="18.0" prefWidth="78.0" styleClass="normal-text" text="Precipitation">
+               <font>
+                  <Font name="Calibri" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="183.0" layoutY="97.0" prefHeight="18.0" prefWidth="78.0" styleClass="normal-text" text="Humadity">
+               <font>
+                  <Font name="Calibri" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="271.0" layoutY="97.0" prefHeight="18.0" prefWidth="28.0" styleClass="normal-text" text="AQI">
+               <font>
+                  <Font name="Calibri" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="97.0" prefHeight="18.0" prefWidth="64.0" styleClass="normal-text" text="Feels Like ">
+               <font>
+                  <Font name="Calibri" size="14.0" />
+               </font>
+            </Label>
+         </children></AnchorPane> <!-- Curvy drop-down search panel -->
+        <AnchorPane fx:id="searchDropPane" managed="true" prefHeight="58.0" prefWidth="351.0" styleClass="curvy-drop" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <TextField fx:id="dropdownCityInput" layoutY="12.0" onAction="#onDropdownSearch" prefHeight="34.0" prefWidth="351.0" promptText="Search city..." styleClass="curvy-textfield" />
+            </children>
+        </AnchorPane>
+        <Label fx:id="locationLabel" alignment="CENTER" layoutY="69.0" prefHeight="34.0" prefWidth="326.0" styleClass="normal-text" text="➤ Location">
+            <font>
+                <Font name="Calibri Bold" size="21.0" />
+            </font>
+        </Label> <!-- Toggle button -->
+        <Button fx:id="searchFieldButton" layoutX="14.0" layoutY="66.0" maxHeight="46.0" maxWidth="46.0" minHeight="34.0" minWidth="30.0" mnemonicParsing="false" onAction="#onSearchFieldClick" prefHeight="46.0" prefWidth="46.0" styleClass="search-field-button" text="➕" textFill="WHITE" />
+        <Label fx:id="tempLabel" alignment="CENTER" layoutX="79.0" layoutY="103.0" prefHeight="174.0" prefWidth="234.0" styleClass="tempLabel" text="X°">
+            <font>
+                <Font name="System Bold Italic" size="140.0" />
+            </font>
+        </Label>
+        <Label fx:id="timeLabel" alignment="CENTER" layoutY="103.0" prefHeight="26.0" prefWidth="351.0" styleClass="normal-text" text="Date &amp; Time">
+            <font>
+                <Font name="Calibri Italic" size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="conditionLabel" layoutX="42.0" layoutY="253.0" prefHeight="34.0" prefWidth="210.0" styleClass="normal-text" text="Condition">
+            <font>
+                <Font name="Calibri Bold Italic" size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="humidityLabel" alignment="CENTER" layoutX="208.0" layoutY="358.0" prefHeight="26.0" prefWidth="57.0" style="-fx-font-size: 16px;" styleClass="normal-text" text="XX%" />
+        <Label fx:id="prLabel" alignment="CENTER" layoutX="121.0" layoutY="358.0" prefHeight="26.0" prefWidth="57.0" style="-fx-font-size: 16px;" styleClass="normal-text" text="XXXmm" />
+        <Label fx:id="feelLabel" alignment="CENTER" layoutX="31.0" layoutY="358.0" prefHeight="26.0" prefWidth="57.0" style="-fx-font-size: 16px;" styleClass="normal-text" text="X°" />
+        <Label fx:id="aqiLabel" alignment="CENTER" layoutX="271.0" layoutY="358.0" prefHeight="26.0" prefWidth="57.0" style="-fx-font-size: 16px;" styleClass="normal-text" text="X" />
+        <ScrollPane hbarPolicy="AS_NEEDED" layoutX="12.0" layoutY="630.0" prefHeight="120.0" prefWidth="326.0" vbarPolicy="NEVER">
+            <content>
+                <HBox fx:id="last7DaysHBox" layoutX="12.0" layoutY="609.0" prefHeight="100.0" prefWidth="326.0" spacing="10" styleClass="scroll-pane-forecast" />
+            </content>
+        </ScrollPane>
+        <VBox fx:id="future3DaysVBox" layoutX="12.0" layoutY="462.0" prefHeight="120.0" prefWidth="326.0" spacing="5.0">
+            <children>
+                <Label prefHeight="31.0" prefWidth="320.0" styleClass="future-day-card" text="Label" visible="false" />
+                <Label prefHeight="31.0" prefWidth="320.0" styleClass="future-day-card" text="Label" visible="false" />
+                <Label prefHeight="31.0" prefWidth="320.0" styleClass="future-day-card" text="Label" visible="false" />
+            </children>
+        </VBox>
+        <ImageView fx:id="weatherIcon" fitHeight="109.0" fitWidth="148.0" layoutX="188.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+            <effect>
+                <DropShadow offsetX="10.0" offsetY="10.0" />
+            </effect>
+        </ImageView>
+        <ImageView fitHeight="40.0" fitWidth="51.0" layoutX="280.0" layoutY="318.0" preserveRatio="true" styleClass="icon-fill">
+            <image>
+                <Image url="@../../../Image/air-quality.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="34.0" fitWidth="21.0" layoutX="226.0" layoutY="322.0" preserveRatio="true" styleClass="icon-fill">
+            <image>
+                <Image url="@../../../Image/clipart4264098.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="40.0" fitWidth="200.0" layoutX="41.0" layoutY="318.0" preserveRatio="true" styleClass="icon-fill">
+            <image>
+                <Image url="@../../../Image/temperature-icon-png-11084.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="130.0" layoutY="318.0" preserveRatio="true" styleClass="icon-fill">
+            <image>
+                <Image url="@../../../Image/umbrella-icon-png-8.jpg" />
+            </image>
+        </ImageView>
+        <Label layoutX="14.0" layoutY="428.0" prefHeight="34.0" prefWidth="118.0" styleClass="normal-text" text="3 Days Forecast" textFill="#4e4747">
+            <font>
+                <Font name="Calibri Bold Italic" size="16.0" />
+            </font>
+        </Label>
+        <Label layoutX="14.0" layoutY="601.0" prefHeight="34.0" prefWidth="118.0" styleClass="normal-text" text="Forecast History" textFill="#4e4747">
+            <font>
+                <Font name="Calibri Bold Italic" size="16.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

@@ -1,0 +1,137 @@
+/* Base grid cells */
+.grid-cell {
+    -fx-fill: linear-gradient(from 0% 0% to 100% 100%, #d3d3d3, #a9a9a9);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0, 1, 1);
+}
+
+/* Player ships base */
+.player-ship {
+    -fx-arc-width: 8;
+    -fx-arc-height: 8;
+    -fx-stroke: black;
+    -fx-stroke-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 4, 0, 2, 2);
+    -fx-cursor: hand;
+    -fx-opacity: 0.95;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* Ship types */
+.battleship {
+    -fx-fill: linear-gradient(to bottom right, #1e90ff, #104e8b);
+    -fx-effect: innershadow(two-pass-box, rgba(0,0,0,0.6), 4, 0.5, 1, 1);
+}
+
+.destroyer {
+    -fx-fill: linear-gradient(to bottom right, #00bfff, #005f8b);
+    -fx-effect: innershadow(two-pass-box, rgba(0,0,0,0.5), 3, 0.5, 1, 1);
+}
+
+.submarine {
+    -fx-fill: linear-gradient(to bottom right, #6495ed, #1e3f8b);
+    -fx-effect: innershadow(two-pass-box, rgba(0,0,0,0.4), 2, 0.5, 1, 1);
+}
+
+
+/* AI grid cells (hidden ships) */
+.ai-grid .grid-cell {
+    -fx-fill: linear-gradient(from 0% 0% to 100% 100%, #fffacd, #f0e68c);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+
+/* Hit and miss */
+.grid-cell.hit {
+    -fx-fill: radial-gradient(center 50% 50%, radius 50%, #ff0000, #800000);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 4, 0, 0, 0);
+}
+
+.grid-cell.miss {
+    -fx-fill: radial-gradient(center 50% 50%, radius 50%, #cccccc, #666666);
+}
+
+.startButton {
+    -fx-background-color: linear-gradient(to bottom, #1e3c72, #2a5298);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #0a234f;
+    -fx-border-width: 2;
+    -fx-padding: 10 20 10 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 5, 0, 0, 2);
+    -fx-cursor: hand;
+}
+
+.startButton:hover {
+    -fx-background-color: linear-gradient(to bottom, #2a5298, #1e3c72);
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.3), 8, 0, 0, 0);
+}
+
+.difficulty-button {
+    -fx-background-color: linear-gradient(to bottom, #13547a, #80d0c7);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #0a234f;
+    -fx-border-width: 2;
+    -fx-padding: 8 16 8 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 4, 0, 0, 2);
+    -fx-cursor: hand;
+}
+
+.difficulty-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #80d0c7, #13547a);
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.3), 6, 0, 0, 0);
+}
+
+
+.game-button {
+    -fx-background-color: linear-gradient(to bottom, #1f3b5e, #345d7e);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #0a234f;
+    -fx-border-width: 2;
+    -fx-padding: 6 12 6 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);
+    -fx-cursor: hand;
+}
+
+.game-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #345d7e, #1f3b5e);
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.25), 5, 0, 0, 0);
+}
+
+
+.side-menu-back-button {
+    -fx-background-color: #0a1d37;  /* Bright cyan/blue */
+    -fx-text-fill: white;            /* White text */
+    -fx-background-radius: 50%;      /* Makes it a perfect circle */
+    -fx-min-width: 50px;              /* Equal width */
+    -fx-min-height: 50px;             /* Equal height */
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-font-size: 16px;              /* Icon or letter size */
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 2);
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.side-menu-back-button:hover {
+    -fx-background-color: #243949;  /* Slightly darker cyan on hover */
+}
+
+.side-menu-back-button:pressed {
+    -fx-background-color: #1c2533;  /* Even darker when clicked */
+}
