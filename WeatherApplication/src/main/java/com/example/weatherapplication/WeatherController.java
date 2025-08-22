@@ -1,18 +1,15 @@
 package com.example.weatherapplication;
 
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,27 +22,47 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.Objects;
 
+
 public class WeatherController {
 
-    @FXML private Label tempLabel;
-    @FXML private Label humidityLabel;
-    @FXML private Label conditionLabel;
-    @FXML private AnchorPane searchDropPane;
-    @FXML private TextField dropdownCityInput;
-    @FXML private Label locationLabel;
-    @FXML private Label timeLabel;
-    @FXML private Label feelLabel;
-    @FXML private Label prLabel;
-    @FXML private Label aqiLabel;
-    @FXML private VBox future3DaysVBox;
-    @FXML private HBox last7DaysHBox;
-    @FXML private ImageView weatherIcon;
-    @FXML private ImageView background;
+    @FXML
+    private Label tempLabel;
+    @FXML
+    private Label humidityLabel;
+    @FXML
+    private Label conditionLabel;
+    @FXML
+    private AnchorPane searchDropPane;
+    @FXML
+    private TextField dropdownCityInput;
+    @FXML
+    private Label locationLabel;
+    @FXML
+    private Label timeLabel;
+    @FXML
+    private Label feelLabel;
+    @FXML
+    private Label prLabel;
+    @FXML
+    private Label aqiLabel;
+    @FXML
+    private VBox future3DaysVBox;
+    @FXML
+    private HBox last7DaysHBox;
+    @FXML
+    private ImageView weatherIcon;
+    @FXML
+    private ImageView background;
+    @FXML
+    private AnchorPane root;
+
+    private JSONObject prevData;
+
 
     private Timeline clock;
 
-    private String lightCss = getClass().getResource("WeatherApplicationStyle.css").toExternalForm();
-    private String darkCss  = getClass().getResource("WeatherApplicationStyle_Dark.css").toExternalForm();
+    private final String lightCss = Objects.requireNonNull(getClass().getResource("WeatherApplicationStyle.css")).toExternalForm();
+    private final String darkCss = Objects.requireNonNull(getClass().getResource("WeatherApplicationStyle_Dark.css")).toExternalForm();
 
     @FXML
     private void onDropdownSearch() {
@@ -65,25 +82,27 @@ public class WeatherController {
 
     private void performSearch(String city) {
         if (city.isEmpty()) {
-            tempLabel.setText("");
-            humidityLabel.setText("");
-            conditionLabel.setText("");
-            locationLabel.setText("");
-            timeLabel.setText("");
-            feelLabel.setText("");
-            prLabel.setText("");
-            aqiLabel.setText("");
-            future3DaysVBox.getChildren().clear();
-            last7DaysHBox.getChildren().clear();
-            if (clock != null) clock.stop();
+            javafx.application.Platform.runLater(() -> showError("City cannot be empty!"));
             return;
         }
 
         new Thread(() -> {
             try {
+                String newCityName = city.trim().toLowerCase();
+
+                if (prevData != null) {
+                    String prevCityName = prevData.getString("name").trim().toLowerCase();
+                    if (newCityName.equals(prevCityName)) {
+                        System.out.println("SameCity");
+                        return; // skip fetching
+                    }
+                }
+
+                javafx.application.Platform.runLater(() -> showError("Fetching Data.."));
 
                 JSONObject data = WeatherService.getCurrentWeather(city);
                 JSONObject location = data.getJSONObject("location");
+                prevData = location;
                 JSONObject current = data.getJSONObject("current");
                 String iconUrl = "https:" + current.getJSONObject("condition").getString("icon");
                 Image image = new Image(iconUrl, true); // true = load in background
@@ -100,10 +119,10 @@ public class WeatherController {
                 double precipitation = current.getDouble("precip_mm");
                 int aqi = current.getJSONObject("air_quality").getInt("us-epa-index");
 
-               //Future 3-day forecast
+                //Future 3-day forecast
                 JSONArray next3Days = WeatherService.getNext3DaysForecast(city);
 
-               //Last 7-day history
+                //Last 7-day history
                 JSONArray last7Days = WeatherService.getLast7DaysHistory(city);
 
                 // update UI on JavaFX thread
@@ -122,7 +141,7 @@ public class WeatherController {
                     DateTimeFormatter timeFmt = DateTimeFormatter.ofPattern("HH:mm:ss");
                     DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
-                    clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+                    clock = new Timeline(new KeyFrame(Duration.ZERO, _ -> {
                         ZonedDateTime now = ZonedDateTime.now(ZoneId.of(tzId));
                         timeLabel.setText(now.format(dateFmt) + ", " + now.format(timeFmt));
                         applyDayNightMode(now);
@@ -142,7 +161,7 @@ public class WeatherController {
                         Label dayLabel = new Label(dayOfWeek + " | Max: " + Math.round(day.getDouble("maxtemp_c")) + "°"
                                 + " | Min: " + Math.round(day.getDouble("mintemp_c")) + "°"
                                 + " | " + day.getString("condition"));
-                        dayLabel.getStyleClass().add("future-day-card"); // CSS class
+                        dayLabel.getStyleClass().add("future-day-card");
                         future3DaysVBox.getChildren().add(dayLabel);
                     }
 
@@ -164,23 +183,56 @@ public class WeatherController {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                javafx.application.Platform.runLater(() -> {
-                    tempLabel.setText("");
-                    humidityLabel.setText("");
-                    conditionLabel.setText("");
-                    locationLabel.setText("");
-                    timeLabel.setText("");
-                    feelLabel.setText("");
-                    prLabel.setText("");
-                    aqiLabel.setText("");
-                    future3DaysVBox.getChildren().clear();
-                    last7DaysHBox.getChildren().clear();
-                    if (clock != null) clock.stop();
-                });
+                javafx.application.Platform.runLater(() -> showError("City not found!"));
             }
         }).start();
     }
 
+    private void showError(String message) {
+        Label errorLabel = new Label(message);
+        errorLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+
+        StackPane toast = new StackPane(errorLabel);
+        toast.setOpacity(0);
+        toast.setMaxWidth(300);
+        toast.setStyle(
+                "-fx-background-color: rgba(220,20,60,1);" +
+                        "-fx-background-radius: 15;" +
+                        "-fx-padding: 12px 20px;" +
+                        "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0.3, 0, 4);"
+        );
+
+
+        toast.setEffect(new BoxBlur(10, 10, 3));
+
+
+        root.getChildren().add(toast);
+        StackPane.setAlignment(toast, Pos.TOP_CENTER);
+        StackPane.setMargin(toast, new Insets(80, 0, 0, 0)); // push ~80px down
+
+
+        TranslateTransition slideIn = new TranslateTransition(Duration.millis(300), toast);
+        slideIn.setFromY(70);
+        slideIn.setToY(120);
+
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(300), toast);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+
+        ParallelTransition showAnim = new ParallelTransition(slideIn, fadeIn);
+        showAnim.play();
+
+        // Auto hide after 3s
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(e -> {
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(500), toast);
+            fadeOut.setFromValue(1);
+            fadeOut.setToValue(0);
+            fadeOut.setOnFinished(ev -> root.getChildren().remove(toast));
+            fadeOut.play();
+        });
+        delay.play();
+    }
 
 
     // Toggle the dropdown
@@ -253,10 +305,6 @@ public class WeatherController {
             e.printStackTrace();
         }
     }
-
-
-
-
 
 
 }
