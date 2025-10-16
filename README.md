@@ -11,9 +11,9 @@ This collection reflects the ongoing progress and experimentation with JavaFX an
 - Improving UI development skills using FXML and CSS.
 - Developing practical, small applications to solidify concepts and solve real-world problems.
 
-## 📂 Projects Showcase
+##  Projects Showcase
 
-### 🎬 Movie Browser Application
+###  Movie Browser Application
 
 A visually-rich application for browsing a collection of movies. The app features a dark, modern theme and fetches all movie data from a local MySQL database.
 
@@ -27,7 +27,7 @@ A visually-rich application for browsing a collection of movies. The app feature
 
 <br>
 
-### 🌦️ Weather Application
+###  Weather Application
 
 A sleek and simple weather forecast application that provides real-time weather data for any location.
 
@@ -43,7 +43,7 @@ A sleek and simple weather forecast application that provides real-time weather 
 | **Pomodoro_Application**      | Implements the Pomodoro Technique for time management, featuring timers and break intervals. Created to learn timer functionality and event-driven programming.[2][3]           |
 | **battleship**                | A classic Battleship game showing grid-based logic, user interaction, and basic multiplayer support. Built to understand game loops and interactive GUI elements.[6][7]       |      
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
   * **Language**: **Java**
   * **Framework**: **JavaFX**
