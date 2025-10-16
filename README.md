@@ -40,8 +40,8 @@ A sleek and simple weather forecast application that provides real-time weather 
 
 | Application                 | Description                                                                                           |
 |-----------------------------|-------------------------------------------------------------------------------------------------------|
-| **Pomodoro_Application**      | Implements the Pomodoro Technique for time management, featuring timers and break intervals. Created to learn timer functionality and event-driven programming.[2][3]           |
-| **battleship**                | A classic Battleship game showing grid-based logic, user interaction, and basic multiplayer support. Built to understand game loops and interactive GUI elements.[6][7]       |      
+| **Pomodoro_Application**      | Implements the Pomodoro Technique for time management, featuring timers and break intervals. Created to learn timer functionality and event-driven programming.         |
+| **battleship**                | A classic Battleship game showing grid-based logic, user interaction, and basic multiplayer support. Built to understand game loops and interactive GUI elements.      |      
 
 ##  Tech Stack
 
