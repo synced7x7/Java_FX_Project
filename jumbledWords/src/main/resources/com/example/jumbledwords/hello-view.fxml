@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jumbledwords.HelloController">
+   <children>
+      <Label layoutX="8.0" layoutY="38.0" prefHeight="34.0" prefWidth="600.0" text="Jumbled Words" textAlignment="CENTER">
+         <font>
+            <Font name="Archivo Condensed Regular" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="ansLabel1" layoutX="382.0" layoutY="122.0" prefHeight="36.0" prefWidth="319.0" text="Label1">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="ansLabel2" layoutX="382.0" layoutY="252.0" prefHeight="36.0" prefWidth="319.0" text="Label2">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="ansLabel3" layoutX="382.0" layoutY="379.0" prefHeight="36.0" prefWidth="319.0" text="Label3">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <HBox fx:id="hBox1" alignment="CENTER" layoutX="29.0" layoutY="90.0" prefHeight="100.0" prefWidth="288.0" />
+      <HBox fx:id="hBox2" alignment="CENTER" layoutX="29.0" layoutY="220.0" prefHeight="100.0" prefWidth="288.0" />
+      <HBox fx:id="hBox3" alignment="CENTER" layoutX="32.0" layoutY="347.0" prefHeight="100.0" prefWidth="288.0" />
+      <Label fx:id="judgeLabel2" layoutX="224.0" layoutY="203.0" prefHeight="17.0" prefWidth="193.0" text="Label">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="judgeLabel1" layoutX="224.0" layoutY="64.0" prefHeight="17.0" prefWidth="193.0" text="Label">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="judgeLabel3" layoutX="221.0" layoutY="339.0" prefHeight="17.0" prefWidth="193.0" text="Label">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="myImageView" fitHeight="82.0" fitWidth="86.0" layoutX="314.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="myImageView2" fitHeight="82.0" fitWidth="86.0" layoutX="309.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="myImageView3" fitHeight="82.0" fitWidth="86.0" layoutX="309.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
